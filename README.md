@@ -1,0 +1,2 @@
+# jot
+Personal diary system
