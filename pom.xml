@@ -51,6 +51,31 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>migration-dry-run</id>
+						<phase>none</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>psqldef</executable>
+							<arguments>
+								<argument>--dry-run</argument>
+								<argument>--user=${env.DB_USER}</argument>
+								<argument>--password=${env.DB_PASSWORD}</argument>
+								<argument>--host=${env.DB_HOST}</argument>
+								<argument>--file=src/main/resources/db/schema.sql</argument>
+								<argument>${env.DB_NAME}</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
